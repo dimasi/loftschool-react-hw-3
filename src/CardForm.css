@@ -1,4 +1,7 @@
-.card-form {
+.CardForm {
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: column; }
+  .CardForm__left-time {
+    margin-top: 0; }
+  .CardForm__field {
+    margin-bottom: 10px; }
