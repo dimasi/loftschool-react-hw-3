@@ -1,0 +1,12 @@
+.CardForm {
+    display: flex;
+    flex-direction: column;
+
+    &__left-time {
+        margin-top: 0;
+    }
+
+    &__field {
+        margin-bottom: 10px;
+    }
+}
