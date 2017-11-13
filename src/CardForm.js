@@ -34,8 +34,8 @@ export class CardForm extends Component {
   pretifyCardNumber = () => {
     let cardNumber = '';
     // Чтобы не падали тесты
-    if (this.props.cardNumber !== undefined) {
-      cardNumber = this.props.cardNumber.replace(/(.{4})/g, '$1 ');
+    if (this.props.cardNumber) {
+      let cardNumber = this.props.cardNumber.replace(/(.{4})/g, '$1 ');
       if (cardNumber.lastIndexOf(' ') === cardNumber.length - 1) cardNumber = cardNumber.substring(0, cardNumber.length - 1);
     }
     return cardNumber;
