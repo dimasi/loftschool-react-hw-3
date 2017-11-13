@@ -1,40 +1,22 @@
-.App {
-  width: 740px;
-  min-height: 100vh;
-  padding: 15px;
-  margin: 0 auto;
-  background-color: #fff;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); }
-  .App__tab-panel {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 46px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc; }
-  .App__footer {
-    display: flex;
-    justify-content: flex-end; }
-  .App__button-next {
-    min-width: 130px;
-    height: 46px;
-    border: 1px solid #1a1ac3;
-    background-color: #1a1ac3;
-    color: #fff;
-    cursor: pointer; }
-    .App__button-next:disabled {
-      border-color: #ccc;
-      background-color: #eee;
-      color: #4a4a4a;
-      cursor: not-allowed; }
-    .App__button-next_hidden {
-      display: none; }
-  .App__textfield {
-    width: 100%;
-    height: 46px;
-    padding: 0 10px;
-    position: relative;
-    z-index: 2;
-    border: 1px solid #ccc;
-    color: #4a4a4a;
-    font-size: 18px; }
+.container {
+  width: 100%; }
+
+.tab-panel {
+  display: flex;
+  justify-content: space-between; }
+
+.form-content {
+  padding: 0 20px; }
+
+.button-panel {
+  padding: 10px 20px;
+  display: flex; }
+
+.button-next {
+  margin-left: auto;
+  background-color: blue;
+  color: white; }
+
+.button-next:disabled {
+  background-color: #eee;
+  color: black; }
