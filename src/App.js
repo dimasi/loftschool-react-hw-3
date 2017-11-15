@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import cx from 'classnames';
 import Step from './Step';
 import PersonalForm from './PersonalForm';
@@ -8,7 +8,7 @@ import './App.css';
 
 const stepTitles = ['Personal information', 'Card information', 'Finish'];
 
-class App extends Component {
+class App extends PureComponent {
   state = {
     step: 1,
     firstName: '',
@@ -23,16 +23,14 @@ class App extends Component {
     
     if (step === 1) {
       const {firstName, lastName, email} = this.state;
+
       return firstName.length && lastName.length && email.length && email.includes('@');
     }
 
     else if (step === 2) {
       const {cardNumber} = this.state;
-      return cardNumber.match(/^\d{16}$/);
-    }
 
-    else {
-      return false;
+      return cardNumber.length === 16;
     }
   }
 
@@ -62,6 +60,43 @@ class App extends Component {
     });
   }
 
+  renderForm = () => {
+    const {step} = this.state;
+
+    let content = '';
+    
+    if (step === 1) {
+      const {firstName, lastName, email} = this.state;
+      
+      content = (
+        <PersonalForm 
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          onChangeForm={this.handleChangeForm}
+        />
+      );
+    }
+    
+    else if (step === 2) {
+      const {cardNumber} = this.state;
+      
+      content = (
+        <CardForm 
+          cardNumber={cardNumber}
+          onChangeForm={this.handleChangeForm}
+          onChangeTimeOver={this.handleChangeTimeOver}
+        />
+      );
+    }
+
+    else if (step === 3) {
+      content = 'Поздравляем!';
+    }
+
+    return content;
+  }
+  
   render() {
     const {step, isTimeOver} = this.state;
 
@@ -79,7 +114,9 @@ class App extends Component {
                   isSelected={step === stepNumber}
                   number={stepNumber}
                   isClickable={stepNumber < step}
-                >{stepTitle}</Step>
+                >
+                {stepTitle}
+                </Step>
               )
             })}
           </header>
@@ -97,42 +134,6 @@ class App extends Component {
         </div>
       </div>
     );
-  }
-
-  renderForm = () => {
-    const {step} = this.state;
-    let content = '';
-    
-    if (step === 1) {
-      const {firstName, lastName, email} = this.state;
-      
-      content = (
-        <PersonalForm 
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          onChangeForm={this.handleChangeForm}
-        />
-      );
-    }
-    
-    if (step === 2) {
-      const {cardNumber} = this.state;
-      
-      content = (
-        <CardForm 
-          cardNumber={cardNumber}
-          onChangeForm={this.handleChangeForm}
-          onChangeTimeOver={this.handleChangeTimeOver}
-        />
-      );
-    }
-
-    if (step === 3) {
-      content = 'Поздравляем!';
-    }
-
-    return content;
   }
 }
 

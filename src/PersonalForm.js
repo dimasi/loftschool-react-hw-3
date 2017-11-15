@@ -1,11 +1,13 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Title from './Title';
 import './PersonalForm.css';
 
-export class PersonalForm extends Component {
+export class PersonalForm extends PureComponent {
   handleChangeForm = e => {
     const {onChangeForm} = this.props;
-    onChangeForm(e.target.name, e.target.value);
+    const {name, value} = e.target;
+
+    onChangeForm(name, value);
   }
 
   render() {

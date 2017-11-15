@@ -1,21 +1,24 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Title from './Title';
 import './CardForm.css';
 
-export class CardForm extends Component {
+export class CardForm extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       leftTime: 120
     };
+
     props.onChangeTimeOver(false);
   }
 
   componentDidMount() {
     this.id = setInterval(() => {
       const leftTime = Math.max(this.state.leftTime - 1, 0);
+
       this.setState({leftTime});
+
       if (leftTime === 0 && this.state.leftTime === 1) {
         this.props.onChangeTimeOver(true);
       }
@@ -28,16 +31,19 @@ export class CardForm extends Component {
 
   handleChangeForm = e => {
     const {onChangeForm} = this.props;
-    onChangeForm(e.target.name, e.target.value.replace(/\s/g, '').substring(0, 16));
+    const {name, value} = e.target;
+    const normalizedValue = value.replace(/\s/g, '').substring(0, 16);
+
+    onChangeForm(name, normalizedValue);
   }
 
   pretifyCardNumber = () => {
     let cardNumber = '';
-    // Чтобы не падали тесты
+
     if (this.props.cardNumber !== undefined) {
-      cardNumber = this.props.cardNumber.replace(/(.{4})/g, '$1 ');
-      if (cardNumber.lastIndexOf(' ') === cardNumber.length - 1) cardNumber = cardNumber.substring(0, cardNumber.length - 1);
+      cardNumber = this.props.cardNumber.replace(/(.{4})/g, '$1 ').trim();
     }
+
     return cardNumber;
   }
 
