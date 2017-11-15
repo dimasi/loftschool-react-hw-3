@@ -19,17 +19,13 @@ class App extends PureComponent {
   }
 
   isFormCommitable = () => {
-    const {step} = this.state;
+    const {step, firstName, lastName, email, cardNumber} = this.state;
     
     if (step === 1) {
-      const {firstName, lastName, email} = this.state;
-
       return firstName.length && lastName.length && email.length && email.includes('@');
     }
 
     else if (step === 2) {
-      const {cardNumber} = this.state;
-
       return cardNumber.length === 16;
     }
   }
@@ -61,13 +57,11 @@ class App extends PureComponent {
   }
 
   renderForm = () => {
-    const {step} = this.state;
+    const {step, firstName, lastName, email, cardNumber} = this.state;
 
     let content = '';
     
     if (step === 1) {
-      const {firstName, lastName, email} = this.state;
-      
       content = (
         <PersonalForm 
           firstName={firstName}
@@ -79,8 +73,6 @@ class App extends PureComponent {
     }
     
     else if (step === 2) {
-      const {cardNumber} = this.state;
-      
       content = (
         <CardForm 
           cardNumber={cardNumber}
